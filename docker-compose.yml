@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: hack-kazan-admin
+      POSTGRES_PASSWORD: 9EamedR2
+      POSTGRES_DB: production
+    networks:
+      - backend
+    ports:
+      - "5433:5432"
+    volumes:
+      - database-pg:/var/lib/postgresql/data
+  
+  api:
+    build:
+      context: .
+      dockerfile: hack-kazan/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    depends_on:
+      - database
+    networks:
+      - backend
+    restart: always
+    ports:
+      - "81:80"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 2048M
+        reservations:
+          memory: 200M
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  database-pg:
