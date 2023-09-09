@@ -100,4 +100,11 @@ public class UserService : IUserService
         var ordered = list.OrderByDescending(user => user.MarksDiscovered!.Count).Skip(offset).Take(amount).ToList();
         return ordered;
     }
+
+    public async Task<bool> IsMarkDiscovered(Guid userId, int markId)
+    {
+        var candidate = await _userManager.FindByIdAsync(userId.ToString());
+        if (candidate == null) throw new Exception("User not found.");
+        return candidate.MarksDiscovered!.Contains(markId);
+    }
 }
