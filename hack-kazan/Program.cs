@@ -95,6 +95,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", async (context) =>
+{
+    await context.Response.WriteAsync("Жизнь удалась");
+});
+
 app.Run();
 
 // Man, I love Identity Framework
