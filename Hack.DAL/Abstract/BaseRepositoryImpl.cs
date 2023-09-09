@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+/*using System.Linq.Expressions;
 using Hack.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +12,14 @@ public abstract class BaseRepositoryImpl<T> : IBaseRepository<T> where T : class
     protected BaseRepositoryImpl(ApplicationDbContext context)
     {
         _context = context;
-        var prop = context.GetType().GetProperties().First(c => c.GetType().GetGenericArguments()[0] == typeof(DbSet<T>));
+
+        var prop = context.GetType().GetProperties()
+            .Where(p => p.GetType().ContainsGenericParameters)
+            .First(p => p.GetType().GetGenericArguments()[0] == typeof(DbSet<T>));
+        
+        //var prop = context.GetType()
+        //    .GetProperties()
+        //    .First(c => c.GetType().GetGenericArguments().Length > 0 && c.GetType().GetGenericArguments()[0] == typeof(DbSet<T>));
         _data = prop.GetValue(_context) as DbSet<T>;
     }
 
@@ -61,4 +68,4 @@ public abstract class BaseRepositoryImpl<T> : IBaseRepository<T> where T : class
     {
         await _context.SaveChangesAsync();
     }
-}
+}*/
