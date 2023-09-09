@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-
+# postgres://hack-kazan-admin:9EamedR2@92.51.47.29:5433/details?search=public&ssl_mode=disabled
   database:
     image: postgres
     restart: always
