@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Hack.Domain.Entities;
 using Hack.Services;
+using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,9 @@ namespace hack_kazan.Controllers;
 public class UserController : BaseController
 {
     private readonly UserManager<User> _userManager;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public UserController(UserManager<User> userManager, UserService userService)
+    public UserController(UserManager<User> userManager, IUserService userService)
     {
         _userManager = userManager;
         _userService = userService;
