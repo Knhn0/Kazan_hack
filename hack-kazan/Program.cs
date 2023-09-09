@@ -22,6 +22,8 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMarkService, MarkService>();
+builder.Services.AddScoped<IMarkChainService, MarkChainService>();
 //builder.Services.AddScoped<IEconomyService, EconomyService>();
 //builder.Services.AddScoped<IPromoService, PromoService>();
 
