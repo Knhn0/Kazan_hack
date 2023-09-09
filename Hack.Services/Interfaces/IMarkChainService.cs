@@ -4,7 +4,7 @@ namespace Hack.Services.Interfaces;
 
 public interface IMarkChainService : IBaseCrudService<MarkChain>
 {
-    Task Append(int chainId, Mark mark);
-    Task Remove(int chainId, Mark mark);
+    Task AppendMark(int chainId, Mark mark);
+    Task RemoveMark(int chainId, int markId);
     Task<List<Mark>?> GetMarks(int chainId);
 }

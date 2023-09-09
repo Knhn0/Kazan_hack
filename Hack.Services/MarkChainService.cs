@@ -16,7 +16,7 @@ public class MarkChainService : BaseCrudServiceImpl<MarkChain>, IMarkChainServic
         _data = data;
     }
 
-    public async Task Append(int chainId, Mark mark)
+    public async Task AppendMark(int chainId, Mark mark)
     {
         var candidate = await GetByIdAsync(chainId);
         if (candidate is null) throw new Exception("Chain not found");
@@ -24,11 +24,11 @@ public class MarkChainService : BaseCrudServiceImpl<MarkChain>, IMarkChainServic
         await this.UpdateAsync(candidate);
     }
 
-    public async Task Remove(int chainId, Mark mark)
+    public async Task RemoveMark(int chainId, int markId)
     {
         var candidate = await GetByIdAsync(chainId);
         if (candidate is null) throw new Exception("Chain not found");
-        candidate.Marks.Remove(mark);
+        candidate.Marks.RemoveAll(m => m.Id == markId);
         await this.UpdateAsync(candidate);
     }
 
