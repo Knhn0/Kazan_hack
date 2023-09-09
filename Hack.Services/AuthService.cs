@@ -62,7 +62,7 @@ namespace Hack.Services
             };
         }
 
-        public async Task<TokenResponse> LoginByEmail(string email, string password) // МНЕ ПОХУЙ
+        public async Task<TokenResponse> LoginByEmail(string email, string password)
         {
             var candidate = await _userManager.FindByEmailAsync(email);
 

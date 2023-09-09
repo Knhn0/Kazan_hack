@@ -28,11 +28,6 @@ public class DistanceService : IDistanceService
 
     public async Task<List<Mark>> GetMarksNearby(double latitude, double longitude, double radius)
     {
-        /*
-        var candidates = await _markService.FindManyAsync(mark =>
-            GetDistanceBetweenCoordinates(latitude, longitude,
-                mark.Latitude, mark.Longitude) <= radius);
-                */
 
         var all = await _markService.GetAllAsync();
         var found = all.FindAll(mark =>

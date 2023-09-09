@@ -17,17 +17,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
-// эстетично
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Add services to the container
-
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMarkService, MarkService>();
 builder.Services.AddScoped<IDistanceService, DistanceService>();
-//builder.Services.AddScoped<IMarkChainService, MarkChainService>();
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -35,7 +31,6 @@ builder.Services.AddSwaggerGen();
 
 // Add DbContext using SQL Server Provider
 builder.Services.AddDbContext<ApplicationDbContext>();
-//builder.Services.AddSingleton<IMarkChainRepository, MarkChainRepository>();
 
 // Authentication, tokens
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -106,7 +101,6 @@ app.MapGet("/", async (context) =>
 
 app.Run();
 
-// Man, I love Identity Framework
 public static class ModuleInitializer
 {
     [ModuleInitializer]

@@ -61,15 +61,4 @@ public class MarkService : IMarkService
     {
         await _context.SaveChangesAsync();
     }
-
-    /*public async Task<Mark> GetMarkAsync(int id)
-    {
-        if (id.ToString().IsNullOrEmpty())
-        {
-            throw new Exception("id is nullable");
-        }
-        var responce = await _data.FindAsync(id);
-        return responce;
-    }*/
-
 }
