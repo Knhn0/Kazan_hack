@@ -68,7 +68,7 @@ public static class CoordinatesDistanceExtensions
 {
     public static double DistanceTo(this Coordinates baseCoordinates, Coordinates targetCoordinates)
     {
-        return DistanceTo(baseCoordinates, targetCoordinates, UnitOfLength.Kilometers);
+        return DistanceTo(baseCoordinates, targetCoordinates, UnitOfLength.Kilometers) * 1000;
     }
 
     public static double DistanceTo(this Coordinates baseCoordinates, Coordinates targetCoordinates, UnitOfLength unitOfLength)
