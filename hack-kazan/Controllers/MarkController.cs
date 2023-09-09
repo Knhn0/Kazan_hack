@@ -25,7 +25,7 @@ public class MarkController : BaseController
     [Route("get")]
     public async Task<ActionResult<Mark>> GetMarksAsync()
     {
-        var marks = await _markService.FindManyAsync();
+        var marks = await _markService.GetAllAsync();
         return Ok(marks);
     }
 
