@@ -187,6 +187,8 @@ namespace Hack.DAL.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    HeaderImg = table.Column<string>(type: "text", nullable: false),
                     Reward = table.Column<int>(type: "integer", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
@@ -243,6 +245,12 @@ namespace Hack.DAL.Migrations
                 name: "IX_Mark_MarkChainId",
                 table: "Mark",
                 column: "MarkChainId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Mark_Title",
+                table: "Mark",
+                column: "Title",
+                unique: true);
         }
 
         /// <inheritdoc />

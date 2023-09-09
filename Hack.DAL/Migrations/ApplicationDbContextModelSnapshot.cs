@@ -23,7 +23,7 @@ namespace Hack.DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Hack.Domain.Entites.Mark", b =>
+            modelBuilder.Entity("Hack.Domain.Entities.Mark", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,6 +32,10 @@ namespace Hack.DAL.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeaderImg")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -51,14 +55,20 @@ namespace Hack.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MarkChainId");
 
+                    b.HasIndex("Title")
+                        .IsUnique();
+
                     b.ToTable("Mark");
                 });
 
-            modelBuilder.Entity("Hack.Domain.Entites.MarkChain", b =>
+            modelBuilder.Entity("Hack.Domain.Entities.MarkChain", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,7 +89,7 @@ namespace Hack.DAL.Migrations
                     b.ToTable("MarkChains");
                 });
 
-            modelBuilder.Entity("Hack.Domain.Entites.User", b =>
+            modelBuilder.Entity("Hack.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -298,9 +308,9 @@ namespace Hack.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Hack.Domain.Entites.Mark", b =>
+            modelBuilder.Entity("Hack.Domain.Entities.Mark", b =>
                 {
-                    b.HasOne("Hack.Domain.Entites.MarkChain", null)
+                    b.HasOne("Hack.Domain.Entities.MarkChain", null)
                         .WithMany("Marks")
                         .HasForeignKey("MarkChainId");
                 });
@@ -316,7 +326,7 @@ namespace Hack.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Hack.Domain.Entites.User", null)
+                    b.HasOne("Hack.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -325,7 +335,7 @@ namespace Hack.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Hack.Domain.Entites.User", null)
+                    b.HasOne("Hack.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -340,7 +350,7 @@ namespace Hack.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hack.Domain.Entites.User", null)
+                    b.HasOne("Hack.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -349,14 +359,14 @@ namespace Hack.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Hack.Domain.Entites.User", null)
+                    b.HasOne("Hack.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Hack.Domain.Entites.MarkChain", b =>
+            modelBuilder.Entity("Hack.Domain.Entities.MarkChain", b =>
                 {
                     b.Navigation("Marks");
                 });
