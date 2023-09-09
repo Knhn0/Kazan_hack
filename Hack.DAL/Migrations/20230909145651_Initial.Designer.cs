@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hack.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230909143331_Initial")]
+    [Migration("20230909145651_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -67,7 +67,7 @@ namespace Hack.DAL.Migrations
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("Mark");
+                    b.ToTable("Marks");
                 });
 
             modelBuilder.Entity("Hack.Domain.Entities.User", b =>

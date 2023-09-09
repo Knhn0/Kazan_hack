@@ -64,7 +64,7 @@ namespace Hack.DAL.Migrations
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("Mark");
+                    b.ToTable("Marks");
                 });
 
             modelBuilder.Entity("Hack.Domain.Entities.User", b =>
