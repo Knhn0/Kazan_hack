@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Hack.DAL;
+using Hack.DAL.Interfaces;
 using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,52 +9,46 @@ namespace Hack.Services;
 
 public class MarkService : IMarkService
 {
-    private readonly DbSet<Mark> _marks;
-    private readonly ApplicationDbContext _context;
+    private readonly IMarkRepository _repository;
 
-    public MarkService(ApplicationDbContext context)
+    public MarkService(IMarkRepository repository)
     {
-        _context = context;
-        _marks = context.Marks;
+        _repository = repository;
     }
 
     public async Task<List<Mark>> GetAllAsync()
     {
-        return await _marks.ToListAsync();
+        return await _repository.GetAllAsync();
     }
 
     public async Task<Mark> FindFirstAsync(Expression<Func<Mark, bool>> exp)
     {
-        return await _marks.FirstAsync(exp);
+        return await _repository.FindFirstAsync(exp);
     }
 
     public async Task<List<Mark>> FindManyAsync(Expression<Func<Mark, bool>> exp)
     {
-        return await _marks.Where(exp).ToListAsync();
+        return await _repository.FindManyAsync(exp);
     }
 
     public async Task<Mark?> GetByIdAsync(int id)
     {
-        return await _marks.FindAsync(id);
+        return await _repository.GetByIdAsync(id);
     }
 
     public async Task<Mark> UpdateAsync(Mark mark)
     {
-        await Task.Run(() => _marks.Update(mark));
-        // мб сюда нужно сохранение бд написать
-        return mark;
+        return await _repository.UpdateAsync(mark);
     }
 
     public async Task<Mark> CreateAsync(Mark mark)
     {
-        await _marks.AddAsync(mark);
-        return mark;
+        return await _repository.CreateAsync(mark);
     }
 
     public async Task RemoveAsync(Mark mark)
     {
-        await Task.Run(() => _marks.Remove(mark));
-        // написать сохранение бд
+        await _repository.RemoveAsync(mark);
     }
 
     /*public async Task<Mark> GetMarkAsync(int id)
