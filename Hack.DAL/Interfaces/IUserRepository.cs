@@ -1,4 +1,4 @@
-﻿using Hack.Domain.Entities;
+﻿/*using Hack.Domain.Entities;
 
 namespace Hack.DAL.Interfaces;
 
@@ -11,4 +11,4 @@ public interface IUserRepository : IBaseRepository<User>
     Task<User> UpdateAsync(User user);
     
     Task<bool> DeleteAsync(User entity);
-}
+}*/

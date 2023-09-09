@@ -1,5 +1,7 @@
 using Hack.DAL;
+using Hack.DAL.Interfaces;
 using Hack.Domain.Entities;
+using Hack.Services.Abstract;
 using Hack.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,13 +9,11 @@ namespace Hack.Services;
 
 public class MarkChainService : BaseCrudServiceImpl<MarkChain>, IMarkChainService
 {
-    private readonly ApplicationDbContext _context;
-    private readonly DbSet<MarkChain> _data;
+    private readonly IMarkChainRepository _repository;
     
-    public MarkChainService(ApplicationDbContext context, DbSet<MarkChain> data) : base(context, data)
+    public MarkChainService(IMarkChainRepository repository) : base(repository)
     {
-        _context = context;
-        _data = data;
+        _repository = repository;
     }
 
     public async Task AppendMark(int chainId, Mark mark)
