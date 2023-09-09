@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hack.Services;
 
-public class MarkService : BaseCrudServiceImpl<Mark>
+public class MarkService : BaseCrudServiceImpl<Mark>, IMarkService
 {
     private readonly DbSet<Mark> _data;
     private readonly ApplicationDbContext _context;
