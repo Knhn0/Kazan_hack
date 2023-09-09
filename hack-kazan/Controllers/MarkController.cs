@@ -1,19 +1,24 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Claims;
 using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace hack_kazan.Controllers;
 
+[Authorize]
 public class MarkController : BaseController
 {
     private readonly IMarkService _markService;
+    private readonly IUserService _userService;
 
-    public MarkController(IMarkService markService)
+    public MarkController(IMarkService markService, IUserService userService)
     {
         _markService = markService;
+        _userService = userService;
     }
 
     [HttpGet]
@@ -30,11 +35,16 @@ public class MarkController : BaseController
     }
     
     [HttpGet]
-    [Route("get")]
-    public async Task<ActionResult<Mark>> GetMarksAsync()
+    [Route("get/{completed}")]
+    public async Task<ActionResult<Mark>> GetMarksAsync(bool completed)
     {
-        var mark = await _markService.GetAllAsync();
-        return Ok(mark);
+        var usernameClaim = User
+            .Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+
+        if (usernameClaim is null) return BadRequest("bruh");
+        var user = await _userService.GetUserManager().FindByNameAsync(usernameClaim.Value);
+        var marks = await _markService.FindManyAsync(mark => user.MarksDiscovered.Contains(mark.Id));
+        return Ok(marks);
     }
 
     [HttpPost]
