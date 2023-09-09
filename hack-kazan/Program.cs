@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Hack.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,13 +20,13 @@ var config = builder.Configuration;
 // эстетично
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-// Add services to the container.
+// Add services to the container
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMarkService, MarkService>();
-builder.Services.AddScoped<IMarkChainService, MarkChainService>();
-//builder.Services.AddScoped<IEconomyService, EconomyService>();
-//builder.Services.AddScoped<IPromoService, PromoService>();
+//builder.Services.AddScoped<IMarkChainService, MarkChainService>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -33,6 +34,7 @@ builder.Services.AddSwaggerGen();
 
 // Add DbContext using SQL Server Provider
 builder.Services.AddDbContext<ApplicationDbContext>();
+//builder.Services.AddSingleton<IMarkChainRepository, MarkChainRepository>();
 
 // Authentication, tokens
 builder.Services.AddIdentity<User, IdentityRole>()

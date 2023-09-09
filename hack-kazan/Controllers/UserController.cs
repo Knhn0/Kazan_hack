@@ -51,7 +51,7 @@ public class UserController : BaseController
         return Ok(user);
     }
 
-    [HttpDelete("delete")]
+    [HttpDelete("delete/{userId}")]
     public async Task<ActionResult> DeleteUserAsync([Required] string userId)
     {
         var res = Guid.TryParse(userId, out _);

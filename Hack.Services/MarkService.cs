@@ -40,7 +40,7 @@ public class MarkService : IMarkService
     public async Task<Mark> UpdateAsync(Mark mark)
     {
         await Task.Run(() => _marks.Update(mark));
-        // мб сюда нужно сохранение бд написать
+        await _context.SaveChangesAsync();
         return mark;
     }
 
@@ -53,7 +53,7 @@ public class MarkService : IMarkService
     public async Task RemoveAsync(Mark mark)
     {
         await Task.Run(() => _marks.Remove(mark));
-        // написать сохранение бд
+        await _context.SaveChangesAsync();
     }
 
     /*public async Task<Mark> GetMarkAsync(int id)

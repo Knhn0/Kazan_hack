@@ -1,12 +1,17 @@
-﻿namespace Hack.DAL.Interfaces;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
-public interface IBaseRepository<T>
+namespace Hack.DAL.Interfaces;
+
+public interface IBaseRepository<T> where T : class
 {
-    Task<bool> CreateAsync(T entity);
-
-    Task<T> GetAsync(Guid id);
-
-    Task<List<T>> SelectAsync();
-    
-    Task<bool> DeleteAsync(T entity);
+    DbSet<T> GetDbSet();
+    Task<List<T>> GetAllAsync();
+    Task<T> FindFirstAsync(Expression<Func<T, bool>> exp);
+    Task<List<T>> FindManyAsync(Expression<Func<T, bool>> exp);
+    Task<T?> GetByIdAsync(int id);
+    Task<T> UpdateAsync(T t);
+    Task<T> CreateAsync(T t);
+    Task RemoveAsync(T t);
+    Task SaveChangesAsync();
 }
