@@ -50,8 +50,8 @@ builder.Services.AddAuthentication(options =>
 {
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = config["JwtSettings:Issuer"],
-        ValidAudience = config["JwtSettings:Audience"],
+        ValidIssuer = config["JwtSettings:ValidIssuer"],
+        ValidAudience = config["JwtSettings:ValidAudience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
         ValidateIssuer = true,
         ValidateActor = true,
