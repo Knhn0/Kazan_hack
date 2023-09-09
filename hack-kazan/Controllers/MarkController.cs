@@ -59,4 +59,24 @@ public class MarkController : BaseController
         return Ok("Removed");
     }
 
+    [HttpPost]
+    [Route("change-emoji-title")]
+    public async Task<ActionResult<Mark>> EditMarkAsync([FromBody] int id, [FromBody] string emojified)
+    {
+        var mark = (await GetMarkAsync(id)).Value!;
+        mark.EmojifiedTitle = emojified;
+        await _markService.SaveChangesAsync();
+        return mark;
+    }
+    
+    [HttpPost]
+    [Route("change-coords")]
+    public async Task<ActionResult<Mark>> EditMarkAsync([FromBody] int id, [FromBody] double latitude, [FromBody] double longitude)
+    {
+        var mark = (await GetMarkAsync(id)).Value!;
+        mark.Latitude = latitude;
+        mark.Longitude = longitude;
+        await _markService.SaveChangesAsync();
+        return mark;
+    }
 }

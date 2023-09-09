@@ -57,6 +57,11 @@ public class MarkService : IMarkService
         await _context.SaveChangesAsync();
     }
 
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
+
     /*public async Task<Mark> GetMarkAsync(int id)
     {
         if (id.ToString().IsNullOrEmpty())

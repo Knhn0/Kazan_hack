@@ -11,4 +11,5 @@ public interface IBaseCrudService<T> where T : class
     Task<T> UpdateAsync(T t);
     Task<T> CreateAsync(T t);
     Task RemoveAsync(T t);
+    Task SaveChangesAsync();
 }
