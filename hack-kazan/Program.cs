@@ -32,7 +32,6 @@ builder.Services.AddSwaggerGen();
 // Add DbContext using SQL Server Provider
 builder.Services.AddDbContext<ApplicationDbContext>();
 
-
 // Authentication, tokens
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
