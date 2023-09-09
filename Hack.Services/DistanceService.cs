@@ -1,5 +1,4 @@
 using Hack.Domain.Entities;
-using Hack.Gameplay.Utils;
 using Hack.Services.Interfaces;
 
 namespace Hack.Services;
@@ -29,11 +28,19 @@ public class DistanceService : IDistanceService
 
     public async Task<List<Mark>> GetMarksNearby(double latitude, double longitude, double radius)
     {
+        /*
         var candidates = await _markService.FindManyAsync(mark =>
             GetDistanceBetweenCoordinates(latitude, longitude,
                 mark.Latitude, mark.Longitude) <= radius);
-        if (candidates.Count == 0) throw new Exception("No marks has been found nearby");
-        return candidates;
+                */
+
+        var all = await _markService.GetAllAsync();
+        var found = all.FindAll(mark =>
+            GetDistanceBetweenCoordinates(latitude, longitude,
+                mark.Latitude, mark.Longitude) <= radius);
+        
+        if (found.Count == 0) throw new Exception("No marks has been found nearby");
+        return found;
     }
     
     private double GetDistanceBetweenCoordinates(double latitude1, double longitude1, double latitude2,
