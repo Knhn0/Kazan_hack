@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 using Hack.DAL;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

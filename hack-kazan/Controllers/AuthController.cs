@@ -1,6 +1,6 @@
 ﻿using Hack.Domain.Contracts;
 using Hack.Domain.Dto;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

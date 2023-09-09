@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using Hack.DAL;
 using Hack.DAL.Interfaces;
 //using Hack.DAL.Repositories;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Services;
 using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,7 +31,6 @@ builder.Services.AddSwaggerGen();
 
 // Add DbContext using SQL Server Provider
 builder.Services.AddDbContext<ApplicationDbContext>();
-
 
 // Authentication, tokens
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -98,7 +97,7 @@ app.MapControllers();
 app.Run();
 
 // Man, I love Identity Framework
-public static class yModuleInitializer
+public static class ModuleInitializer
 {
     [ModuleInitializer]
     public static void Initialize()

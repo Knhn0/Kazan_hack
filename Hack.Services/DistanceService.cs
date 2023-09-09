@@ -1,4 +1,4 @@
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Gameplay.Utils;
 using Hack.Services.Interfaces;
 
