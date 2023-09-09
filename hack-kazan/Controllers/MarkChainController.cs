@@ -93,4 +93,19 @@ public class MarkChainController : BaseController
             return BadRequest(ex.Message);
         }
     }
+    
+    [HttpDelete]
+    public async Task<ActionResult<MarkChain>> RemoveMarkFromChain([Required] MarkChain markChain)
+    {
+        if (!ModelState.IsValid) return BadRequest("Invalid request.");
+        try
+        {
+            await _markChainService.RemoveAsync(markChain);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
