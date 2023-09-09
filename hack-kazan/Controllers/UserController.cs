@@ -18,7 +18,7 @@ public class UserController : BaseController
         _userService = userService;
     }
 
-    [HttpGet("get")]
+    [HttpGet("get/{userId}")]
     public async Task<ActionResult<User>> GetUserAsync([Required] string userId)
     {
         var res = Guid.TryParse(userId, out _);
