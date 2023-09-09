@@ -20,5 +20,7 @@ public sealed class ApplicationDbContext : IdentityDbContext<User>
     }
         
     public DbSet<Mark> Marks { get; set; }
-    public DbSet<EconomyTransaction> Transactions { get; set; }
+    public DbSet<MarkChain> MarkChains { get; set; }
+    //public DbSet<EconomyTransaction> Transactions { get; set; }
+    public DbSet<Mark> Places { get; set; }
 }

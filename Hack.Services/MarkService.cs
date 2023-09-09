@@ -55,4 +55,15 @@ public class MarkService : IMarkService
         await Task.Run(() => _marks.Remove(mark));
         // написать сохранение бд
     }
+
+    /*public async Task<Mark> GetMarkAsync(int id)
+    {
+        if (id.ToString().IsNullOrEmpty())
+        {
+            throw new Exception("id is nullable");
+        }
+        var responce = await _data.FindAsync(id);
+        return responce;
+    }*/
+
 }

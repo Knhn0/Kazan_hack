@@ -92,5 +92,19 @@ public class UserService : IUserService
         return ordered;
     }
     
-    
+    public async Task<List<User>> OrderByMostDiscoveries(int amount, int offset = 0)
+    {
+        var list = await _userManager.Users.ToListAsync();
+        offset = Math.Max(0, offset);
+        amount = Math.Max(1, amount);
+        var ordered = list.OrderByDescending(user => user.MarksDiscovered!.Count).Skip(offset).Take(amount).ToList();
+        return ordered;
+    }
+
+    public async Task<bool> IsMarkDiscovered(Guid userId, int markId)
+    {
+        var candidate = await _userManager.FindByIdAsync(userId.ToString());
+        if (candidate == null) throw new Exception("User not found.");
+        return candidate.MarksDiscovered!.Contains(markId);
+    }
 }

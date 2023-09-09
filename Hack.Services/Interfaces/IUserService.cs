@@ -16,4 +16,7 @@ public interface IUserService
     Task SetPoints(Guid id, int points);
     Task<List<int>?> GetMarksDiscovered(Guid id);
     Task<List<User>> OrderByHighestPoints(int amount, int offset = 0);
+    Task<List<User>> OrderByMostDiscoveries(int amount, int offset = 0);
+    Task<bool> IsMarkDiscovered(Guid userId, int markId);
+
 }
