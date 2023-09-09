@@ -3,6 +3,7 @@ using Hack.Domain.Entites;
 using Hack.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace hack_kazan.Controllers;
 
@@ -17,7 +18,7 @@ public class UserController : BaseController
         _userService = userService;
     }
 
-    [HttpGet("get")]
+    [HttpGet("get/{userId}")]
     public async Task<ActionResult<User>> GetUserAsync([Required] string userId)
     {
         var res = Guid.TryParse(userId, out _);
@@ -27,6 +28,13 @@ public class UserController : BaseController
         }
 
         var user = await _userManager.FindByIdAsync(userId);
+        return Ok(user);
+    }
+    
+    [HttpGet("get")]
+    public async Task<ActionResult<User>> GetAllUsersAsync()
+    {
+        var user = await _userManager.Users.ToListAsync();
         return Ok(user);
     }
 
