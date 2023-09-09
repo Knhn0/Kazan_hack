@@ -28,6 +28,14 @@ public class MarkController : BaseController
         var mark = await _markService.GetByIdAsync(id);
         return Ok(mark);
     }
+    
+    [HttpGet]
+    [Route("get")]
+    public async Task<ActionResult<Mark>> GetMarksAsync()
+    {
+        var mark = await _markService.GetAllAsync();
+        return Ok(mark);
+    }
 
     [HttpPost]
     [Route("create")]
