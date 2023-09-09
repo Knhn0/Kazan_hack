@@ -2,6 +2,7 @@
 using System.Runtime.Intrinsics.X86;
 using System.Security.Claims;
 using Hack.Domain.Entities;
+using Hack.Services.Contracts;
 using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,13 @@ public class MarkController : BaseController
 {
     private readonly IMarkService _markService;
     private readonly IUserService _userService;
+    private readonly IDistanceService _distanceService;
 
-    public MarkController(IMarkService markService, IUserService userService)
+    public MarkController(IMarkService markService, IUserService userService, IDistanceService distanceService)
     {
         _markService = markService;
         _userService = userService;
+        _distanceService = distanceService;
     }
     
     [HttpGet]
@@ -79,7 +82,7 @@ public class MarkController : BaseController
         return Ok("Removed");
     }
 
-    [HttpPost]
+    /*[HttpPost]
     [Route("change-emoji-title/{id}")]
     public async Task<ActionResult<Mark>> EditMarkAsync(int id, [FromBody] string emojified)
     {
@@ -88,7 +91,7 @@ public class MarkController : BaseController
         await _markService.SaveChangesAsync();
         return mark;
     }
-    
+
     [HttpPost]
     [Route("change-coords")]
     public async Task<ActionResult<Mark>> EditMarkAsync(aSFlksf req)
@@ -98,12 +101,34 @@ public class MarkController : BaseController
         mark.Longitude = req.longitude;
         await _markService.SaveChangesAsync();
         return mark;
-    }
-        
-}
+    }*/
 
-public class aSFlksf
-{
-    public int id;
-    public double latitude, longitude;
+    [HttpPost]
+    [Route("reach")]
+    public async Task<ActionResult<object>> Reach(GetDistanceRequest req)
+    {
+        var usernameClaim = User
+            .Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+
+        if (usernameClaim is null) return BadRequest("bruh");
+        
+        var user = await _userService.GetUserManager().FindByNameAsync(usernameClaim.Value);
+        
+        TryValidateModel(req);
+        if (!ModelState.IsValid) return BadRequest("Bad request");
+
+        double radius = 200;
+
+        var nearby = await _distanceService.GetMarksNearby(req.Latitude, req.Longitude, radius);
+        if (nearby.Count == 0) return BadRequest("Nothing has been reached");
+
+        foreach (var mark in nearby)
+        {
+            user.MarksDiscovered.Add(mark.Id);
+        }
+
+        await _userService.GetUserManager().UpdateAsync(user);
+
+        return nearby;
+    }
 }
