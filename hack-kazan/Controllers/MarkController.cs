@@ -39,10 +39,10 @@ public class MarkController : BaseController
 
     [HttpPost]
     [Route("create")]
-    public async Task<ActionResult<bool>> CreateMarkAsync(Mark mark)
+    public async Task<ActionResult<Mark>> CreateMarkAsync(Mark mark)
     {
         var resp = await _markService.CreateAsync(mark);
-        return Ok("Mark created");
+        return Ok(resp);
     }
 
     [HttpDelete]
