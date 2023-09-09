@@ -1,5 +1,5 @@
 ﻿using Hack.Domain.Dto;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 

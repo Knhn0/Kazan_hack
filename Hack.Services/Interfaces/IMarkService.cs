@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 
 namespace Hack.Services.Interfaces;
 

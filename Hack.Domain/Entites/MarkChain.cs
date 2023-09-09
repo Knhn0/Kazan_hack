@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Hack.Domain.Entites;
+namespace Hack.Domain.Entities;
 
 [PrimaryKey("Id")]
 public class MarkChain

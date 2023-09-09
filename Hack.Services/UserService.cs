@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Hack.Services.Interfaces;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
