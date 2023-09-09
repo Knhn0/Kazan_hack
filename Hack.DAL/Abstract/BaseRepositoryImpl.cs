@@ -1,4 +1,4 @@
-/*using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Hack.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,4 +68,4 @@ public abstract class BaseRepositoryImpl<T> : IBaseRepository<T> where T : class
     {
         await _context.SaveChangesAsync();
     }
-}*/
+}
