@@ -9,10 +9,11 @@ public abstract class BaseRepositoryImpl<T> : IBaseRepository<T> where T : class
     private readonly DbSet<T> _data;
     private readonly ApplicationDbContext _context;
 
-    protected BaseRepositoryImpl(ApplicationDbContext context, DbSet<T> data)
+    protected BaseRepositoryImpl(ApplicationDbContext context)
     {
         _context = context;
-        _data = data;
+        var prop = context.GetType().GetProperties().First(c => c.GetType().GetGenericArguments()[0] == typeof(DbSet<T>));
+        _data = prop.GetValue(_context) as DbSet<T>;
     }
 
     public DbSet<T> GetDbSet() => _data;
