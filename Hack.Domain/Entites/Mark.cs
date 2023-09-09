@@ -3,6 +3,7 @@
 namespace Hack.Domain.Entities;
 
 [PrimaryKey("Id")]
+[Index(nameof(Title), IsUnique = true)]
 public class Mark // локация для поиска, собственно
 {
     public int Id { get; set; }
