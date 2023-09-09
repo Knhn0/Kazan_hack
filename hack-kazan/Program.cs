@@ -25,6 +25,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMarkService, MarkService>();
+builder.Services.AddScoped<IDistanceService, DistanceService>();
 //builder.Services.AddScoped<IMarkChainService, MarkChainService>();
 
 
