@@ -92,5 +92,12 @@ public class UserService : IUserService
         return ordered;
     }
     
-    
+    public async Task<List<User>> OrderByMostDiscoveries(int amount, int offset = 0)
+    {
+        var list = await _userManager.Users.ToListAsync();
+        offset = Math.Max(0, offset);
+        amount = Math.Max(1, amount);
+        var ordered = list.OrderByDescending(user => user.MarksDiscovered!.Count).Skip(offset).Take(amount).ToList();
+        return ordered;
+    }
 }
