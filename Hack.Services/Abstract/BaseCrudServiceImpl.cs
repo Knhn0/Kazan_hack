@@ -52,4 +52,9 @@ public abstract class BaseCrudServiceImpl<T> : IBaseCrudService<T> where T : cla
         await Task.Run(() => _repository.GetDbSet().Remove(t));
         await _repository.SaveChangesAsync();
     }
+
+    public async Task SaveChangesAsync()
+    {
+        await _repository.SaveChangesAsync();
+    }
 }
