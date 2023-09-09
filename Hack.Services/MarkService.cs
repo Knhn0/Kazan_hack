@@ -47,6 +47,7 @@ public class MarkService : IMarkService
     public async Task<Mark> CreateAsync(Mark mark)
     {
         await _marks.AddAsync(mark);
+        await _context.SaveChangesAsync();
         return mark;
     }
 

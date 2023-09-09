@@ -18,7 +18,7 @@ public class MarkController : BaseController
 
     [HttpGet]
     [Route("get/{id}")]
-    public async Task<ActionResult<Mark>> GetMarkAsync (int id)
+    public async Task<ActionResult<Mark>> GetMarkAsync(int id)
     {
         if (id.ToString().IsNullOrEmpty())
         {
