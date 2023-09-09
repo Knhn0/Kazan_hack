@@ -57,4 +57,5 @@ public abstract class BaseCrudServiceImpl<T> : IBaseCrudService<T> where T : cla
     {
         await _repository.SaveChangesAsync();
     }
+    
 }

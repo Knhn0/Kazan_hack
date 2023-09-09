@@ -60,11 +60,12 @@ namespace Hack.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Mark",
+                name: "Marks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EmojifiedTitle = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
@@ -75,7 +76,7 @@ namespace Hack.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mark", x => x.Id);
+                    table.PrimaryKey("PK_Marks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,8 +223,8 @@ namespace Hack.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mark_Title",
-                table: "Mark",
+                name: "IX_Marks_Title",
+                table: "Marks",
                 column: "Title",
                 unique: true);
         }
@@ -247,7 +248,7 @@ namespace Hack.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Mark");
+                name: "Marks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

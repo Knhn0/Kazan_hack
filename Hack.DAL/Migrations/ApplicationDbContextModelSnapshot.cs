@@ -35,6 +35,10 @@ namespace Hack.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("EmojifiedTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("HeaderImg")
                         .IsRequired()
                         .HasColumnType("text");
@@ -60,7 +64,7 @@ namespace Hack.DAL.Migrations
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("Mark");
+                    b.ToTable("Marks");
                 });
 
             modelBuilder.Entity("Hack.Domain.Entities.User", b =>

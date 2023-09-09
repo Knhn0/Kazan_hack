@@ -70,8 +70,8 @@ public class MarkController : BaseController
     }
 
     [HttpPost]
-    [Route("change-emoji-title")]
-    public async Task<ActionResult<Mark>> EditMarkAsync([FromBody] int id, [FromBody] string emojified)
+    [Route("change-emoji-title/{id}")]
+    public async Task<ActionResult<Mark>> EditMarkAsync(int id, [FromBody] string emojified)
     {
         var mark = (await GetMarkAsync(id)).Value!;
         mark.EmojifiedTitle = emojified;
@@ -81,12 +81,19 @@ public class MarkController : BaseController
     
     [HttpPost]
     [Route("change-coords")]
-    public async Task<ActionResult<Mark>> EditMarkAsync([FromBody] int id, [FromBody] double latitude, [FromBody] double longitude)
+    public async Task<ActionResult<Mark>> EditMarkAsync(aSFlksf req)
     {
-        var mark = (await GetMarkAsync(id)).Value!;
-        mark.Latitude = latitude;
-        mark.Longitude = longitude;
+        var mark = (await GetMarkAsync(req.id)).Value!;
+        mark.Latitude = req.latitude;
+        mark.Longitude = req.longitude;
         await _markService.SaveChangesAsync();
         return mark;
     }
+        
+}
+
+public class aSFlksf
+{
+    public int id;
+    public double latitude, longitude;
 }
