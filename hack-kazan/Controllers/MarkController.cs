@@ -60,8 +60,8 @@ public class MarkController : BaseController
     }
 
     [HttpPost]
-    [Route("change-emoji-title")]
-    public async Task<ActionResult<Mark>> EditMarkAsync([FromBody] int id, [FromBody] string emojified)
+    [Route("change-emoji-title/{id}")]
+    public async Task<ActionResult<Mark>> EditMarkAsync(int id, [FromBody] string emojified)
     {
         var mark = (await GetMarkAsync(id)).Value!;
         mark.EmojifiedTitle = emojified;
