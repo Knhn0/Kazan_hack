@@ -1,4 +1,4 @@
-namespace Hack.Gameplay.Utils;
+/*namespace Hack.Gameplay.Utils;
 
 public static class CoordinateCalculator
 {
@@ -66,4 +66,4 @@ public class UnitOfLength
     {
         return input*_fromMilesFactor;
     }
-} 
+} */
