@@ -2,7 +2,7 @@
 using Hack.Domain;
 using Hack.Domain.Contracts;
 using Hack.Domain.Dto;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

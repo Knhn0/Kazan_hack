@@ -1,5 +1,5 @@
 ﻿using Hack.Domain.Dto;
-using Hack.Domain.Entites;
+using Hack.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
