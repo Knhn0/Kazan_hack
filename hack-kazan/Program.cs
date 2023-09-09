@@ -79,7 +79,11 @@ using (var context = (ApplicationDbContext)app.Services.GetService(typeof(Applic
     context.Database.Migrate();
 }
 
-app.UseCors(cors => cors.AllowAnyOrigin());
+app.UseCors(cors =>
+{
+    cors.AllowAnyHeader();
+    cors.AllowAnyOrigin();
+});
 
 app.UseSwagger();
 app.UseSwaggerUI();
