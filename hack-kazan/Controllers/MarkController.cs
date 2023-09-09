@@ -105,7 +105,7 @@ public class MarkController : BaseController
 
     [HttpPost]
     [Route("reach")]
-    public async Task<ActionResult<object>> Reach(GetDistanceRequest req)
+    public async Task<ActionResult<List<Mark>>> Reach(GetDistanceRequest req)
     {
         var usernameClaim = User
             .Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
