@@ -13,7 +13,7 @@ public class MarkRepository : IMarkRepository
     public MarkRepository(ApplicationDbContext context)
     {
         _context = context;
-        _data = null;//context.Marks;
+        _data = context.Marks;
     }
     
     public DbSet<Mark> GetDbSet() => _data;
