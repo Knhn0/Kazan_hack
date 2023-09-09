@@ -32,7 +32,6 @@ builder.Services.AddSwaggerGen();
 // Add DbContext using SQL Server Provider
 builder.Services.AddDbContext<ApplicationDbContext>();
 
-
 // Authentication, tokens
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -94,7 +93,7 @@ app.MapControllers();
 app.Run();
 
 // Man, I love Identity Framework
-public static class yModuleInitializer
+public static class MyModuleInitializer
 {
     [ModuleInitializer]
     public static void Initialize()
