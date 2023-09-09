@@ -20,6 +20,14 @@ public class MarkController : BaseController
         _markService = markService;
         _userService = userService;
     }
+    
+    [HttpGet]
+    [Route("get")]
+    public async Task<ActionResult<Mark>> GetMarksAsync()
+    {
+        var marks = await _markService.FindManyAsync();
+        return Ok(marks);
+    }
 
     [HttpGet]
     [Route("get/{id}")]
