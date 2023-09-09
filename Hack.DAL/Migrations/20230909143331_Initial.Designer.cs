@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hack.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230909133903_Initial")]
+    [Migration("20230909143331_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -35,6 +35,10 @@ namespace Hack.DAL.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("EmojifiedTitle")
                         .IsRequired()
                         .HasColumnType("text");
 

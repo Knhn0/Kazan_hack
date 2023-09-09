@@ -35,6 +35,10 @@ namespace Hack.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("EmojifiedTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("HeaderImg")
                         .IsRequired()
                         .HasColumnType("text");
