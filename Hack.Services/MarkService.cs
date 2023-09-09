@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using Hack.DAL;
-using Hack.DAL.Interfaces;
 using Hack.Domain.Entities;
 using Hack.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -9,46 +8,52 @@ namespace Hack.Services;
 
 public class MarkService : IMarkService
 {
-    private readonly IMarkRepository _repository;
+    private readonly DbSet<Mark> _marks;
+    private readonly ApplicationDbContext _context;
 
-    public MarkService(IMarkRepository repository)
+    public MarkService(ApplicationDbContext context)
     {
-        _repository = repository;
+        _context = context;
+        _marks = context.Marks;
     }
 
     public async Task<List<Mark>> GetAllAsync()
     {
-        return await _repository.GetAllAsync();
+        return await _marks.ToListAsync();
     }
 
     public async Task<Mark> FindFirstAsync(Expression<Func<Mark, bool>> exp)
     {
-        return await _repository.FindFirstAsync(exp);
+        return await _marks.FirstAsync(exp);
     }
 
     public async Task<List<Mark>> FindManyAsync(Expression<Func<Mark, bool>> exp)
     {
-        return await _repository.FindManyAsync(exp);
+        return await _marks.Where(exp).ToListAsync();
     }
 
     public async Task<Mark?> GetByIdAsync(int id)
     {
-        return await _repository.GetByIdAsync(id);
+        return await _marks.FindAsync(id);
     }
 
     public async Task<Mark> UpdateAsync(Mark mark)
     {
-        return await _repository.UpdateAsync(mark);
+        await Task.Run(() => _marks.Update(mark));
+        await _context.SaveChangesAsync();
+        return mark;
     }
 
     public async Task<Mark> CreateAsync(Mark mark)
     {
-        return await _repository.CreateAsync(mark);
+        await _marks.AddAsync(mark);
+        return mark;
     }
 
     public async Task RemoveAsync(Mark mark)
     {
-        await _repository.RemoveAsync(mark);
+        await Task.Run(() => _marks.Remove(mark));
+        await _context.SaveChangesAsync();
     }
 
     /*public async Task<Mark> GetMarkAsync(int id)
