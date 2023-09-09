@@ -43,16 +43,18 @@ public class MarkController : BaseController
     }
     
     [HttpGet]
-    [Route("get/{completed}")]
-    public async Task<ActionResult<Mark>> GetMarksAsync(bool completed)
+    [Route("get-completed")]
+    public async Task<ActionResult<Mark>> GetCompletedMarks()
     {
         var usernameClaim = User
             .Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
 
         if (usernameClaim is null) return BadRequest("bruh");
+        
         var user = await _userService.GetUserManager().FindByNameAsync(usernameClaim.Value);
-        var marks = await _markService.FindManyAsync(mark => user.MarksDiscovered.Contains(mark.Id));
-        return Ok(marks);
+        var completed = await _userService.GetMarksDiscovered(Guid.Parse(user.Id));
+        
+        return Ok(completed);
     }
 
     [HttpPost]
