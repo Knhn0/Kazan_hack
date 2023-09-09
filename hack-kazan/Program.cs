@@ -79,7 +79,7 @@ var app = builder.Build();
 //mirgration up как надо 
 using (var context = (ApplicationDbContext)app.Services.GetService(typeof(ApplicationDbContext))!)
 {
-    context.Database.Migrate();
+    context.Database.EnsureCreated();
 }
 
 app.UseCors(cors =>
