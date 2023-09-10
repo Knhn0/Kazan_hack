@@ -57,7 +57,7 @@ public class MarkController : BaseController
         
         var user = await _userService.GetUserManager().FindByNameAsync(usernameClaim.Value);
         if (user == null) return BadRequest("user == null");
-        var completed = await _userService.GetMarksDiscovered(Guid.Parse(user.Id));
+        var completed = user.MarksDiscovered;
         
         return Ok(completed);
     }
