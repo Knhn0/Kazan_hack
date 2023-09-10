@@ -128,9 +128,6 @@ public class MarkController : BaseController
             if (!(await _userService.IsMarkDiscovered(Guid.Parse(user.Id), mark.Id)))
                 await _userService.AddMarkDiscovered(user.UserName, mark.Id);
         }
-        
-
-        await _userService.GetUserManager().UpdateAsync(user);
 
         return nearby;
     }
