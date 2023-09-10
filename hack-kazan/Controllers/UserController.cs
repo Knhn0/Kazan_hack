@@ -91,7 +91,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    [Route("add-mark/{userId}")]
+    [Route("add-mark")]
     public async Task<ActionResult<User>> AddMark(string id, int markId)
     {
         var user = await _userManager.FindByIdAsync(id);
