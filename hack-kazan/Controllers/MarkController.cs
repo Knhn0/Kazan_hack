@@ -5,6 +5,7 @@ using Hack.Domain.Entities;
 using Hack.Services.Contracts;
 using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -55,6 +56,7 @@ public class MarkController : BaseController
         if (usernameClaim is null) return BadRequest("bruh");
         
         var user = await _userService.GetUserManager().FindByNameAsync(usernameClaim.Value);
+        if (user == null) return BadRequest("user == null");
         var completed = await _userService.GetMarksDiscovered(Guid.Parse(user.Id));
         
         return Ok(completed);
