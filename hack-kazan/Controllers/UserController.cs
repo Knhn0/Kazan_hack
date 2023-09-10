@@ -2,6 +2,7 @@
 using Hack.Domain.Entities;
 using Hack.Services;
 using Hack.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,13 @@ public class UserController : BaseController
 {
     private readonly UserManager<User> _userManager;
     private readonly IUserService _userService;
+    private readonly IMarkService _markService;
 
-    public UserController(UserManager<User> userManager, IUserService userService)
+    public UserController(UserManager<User> userManager, IUserService userService, IMarkService markService)
     {
         _userManager = userManager;
         _userService = userService;
+        _markService = markService;
     }
 
     [HttpGet("get/{userId}")]
@@ -32,7 +35,7 @@ public class UserController : BaseController
         var user = await _userManager.FindByIdAsync(userId);
         return Ok(user);
     }
-    
+
     [HttpGet("get")]
     public async Task<ActionResult<User>> GetAllUsersAsync()
     {
@@ -41,13 +44,14 @@ public class UserController : BaseController
     }
 
     [HttpPut("update")]
-    public async Task<ActionResult<User>> UpdateUserAsync([Required]Guid userId, User user)
+    public async Task<ActionResult<User>> UpdateUserAsync([Required] Guid userId, User user)
     {
         var res = Guid.TryParse(userId.ToString(), out _);
         if (!res)
         {
             return BadRequest("Id is not valid");
         }
+
         user = await _userService.FullyUserUpdate(userId, user);
         return Ok(user);
     }
@@ -62,11 +66,12 @@ public class UserController : BaseController
         }
 
         var user = await _userManager.FindByIdAsync(userId);
-        
+
         if (user == null)
         {
             return BadRequest("User not found");
         }
+
         var response = _userManager.DeleteAsync(user);
         return Ok("User successfully deleted");
     }
@@ -84,5 +89,14 @@ public class UserController : BaseController
         var resp = await _userService.GetUserByUsernameAsync(username);
         return Ok(resp);
     }
-    
+
+    [HttpPost]
+    [Route("add-mark/{userId}")]
+    public async Task<ActionResult<User>> AddMark(string id, int markId)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        var mark = await _markService.GetByIdAsync(markId);
+        if (mark != null) user.MarksDiscovered.Add(markId);
+        return Ok("Ok");
+    }
 }
