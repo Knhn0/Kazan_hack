@@ -92,11 +92,16 @@ public class UserController : BaseController
 
     [HttpPost]
     [Route("add-mark")]
-    public async Task<ActionResult<User>> AddMark(string id, int markId)
+    public async Task<ActionResult<User>> AddMark(string username, int markId)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await _userManager.FindByNameAsync(username);
         var mark = await _markService.GetByIdAsync(markId);
-        if (mark != null) user.MarksDiscovered.Add(markId);
-        return Ok("Ok");
+        if (mark != null)
+        {
+            if (user.MarksDiscovered == null) user.MarksDiscovered = new List<int>();
+            user.MarksDiscovered.Add(markId);
+        }
+        await _userManager.UpdateAsync(user);
+        return Ok(user.MarksDiscovered);
     }
 }
