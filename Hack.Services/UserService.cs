@@ -68,6 +68,11 @@ public class UserService : IUserService
     {
         var candidate = await _userManager.FindByIdAsync(id.ToString());
         if (candidate == null) throw new Exception("User not found.");
+        if (candidate.MarksDiscovered is null)
+        {
+            candidate.MarksDiscovered = new List<int>();
+            await _userManager.UpdateAsync(candidate);
+        }
         return candidate.MarksDiscovered;
     }
 
