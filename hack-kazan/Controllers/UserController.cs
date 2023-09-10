@@ -99,7 +99,7 @@ public class UserController : BaseController
         if (mark != null)
         {
             if (user.MarksDiscovered == null) user.MarksDiscovered = new List<int>();
-            user.MarksDiscovered.Add(markId);
+            if (!user.MarksDiscovered.Contains(markId)) user.MarksDiscovered.Add(markId);
         }
         await _userManager.UpdateAsync(user);
         return Ok(user.MarksDiscovered);
