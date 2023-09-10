@@ -20,5 +20,5 @@ public interface IUserService
     Task<bool> IsMarkDiscovered(Guid userId, int markId);
     Task<User> FullyUserUpdate(Guid id, User user);
     Task<User> GetUserByUsernameAsync(string username);
-    Task<User> DiscoverMark(string username, int markId);
+    Task AddMarkDiscovered(string username, int markId);
 }

@@ -120,6 +120,18 @@ public class UserService : IUserService
         return candidate;
     }
 
+    public async Task AddMarkDiscovered(string username, int markId)
+    {
+        var candidate = await GetUserByUsernameAsync(username);
+        if (candidate == null) throw new Exception("User not found.");
+        if (candidate.MarksDiscovered is null)
+        {
+            candidate.MarksDiscovered = new List<int>();
+        }
+        candidate.MarksDiscovered.Add(markId);
+        await _userManager.UpdateAsync(candidate);
+    }
+
     public async Task<User> DiscoverMark(string username, int markId)
     {
         var user = await GetUserByUsernameAsync(username);

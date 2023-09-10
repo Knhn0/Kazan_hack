@@ -126,7 +126,7 @@ public class MarkController : BaseController
         foreach (var mark in nearby)
         {
             if (!(await _userService.IsMarkDiscovered(Guid.Parse(user.Id), mark.Id)))
-                await _userService.DiscoverMark(user.UserName, mark.Id);
+                await _userService.AddMarkDiscovered(user.UserName, mark.Id);
         }
         
 
