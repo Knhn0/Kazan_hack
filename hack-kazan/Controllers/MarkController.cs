@@ -123,8 +123,10 @@ public class MarkController : BaseController
 
         foreach (var mark in nearby)
         {
-            if (!user.MarksDiscovered.Contains(mark.Id)) user.MarksDiscovered.Add(mark.Id);
+            if (!(await _userService.IsMarkDiscovered(Guid.Parse(user.Id), mark.Id)))
+                await _userService.DiscoverMark(user.UserName, mark.Id);
         }
+        
 
         await _userService.GetUserManager().UpdateAsync(user);
 

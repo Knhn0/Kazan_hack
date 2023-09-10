@@ -115,4 +115,11 @@ public class UserService : IUserService
         return candidate;
     }
 
+    public async Task<User> DiscoverMark(string username, int markId)
+    {
+        var user = await GetUserByUsernameAsync(username);
+        user.MarksDiscovered?.Add(markId);
+        await _userManager.UpdateAsync(user);
+        return user;
+    }
 }
