@@ -120,11 +120,10 @@ public class MarkController : BaseController
         double radius = 200;
             
         var nearby = await _distanceService.GetMarksNearby(req.Latitude, req.Longitude, radius);
-        if (nearby.Count == 0) return BadRequest("Nothing has been reached");
 
         foreach (var mark in nearby)
         {
-            user.MarksDiscovered.Add(mark.Id);
+            if (!user.MarksDiscovered.Contains(mark.Id)) user.MarksDiscovered.Add(mark.Id);
         }
 
         await _userService.GetUserManager().UpdateAsync(user);
