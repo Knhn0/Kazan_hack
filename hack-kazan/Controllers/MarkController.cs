@@ -118,7 +118,7 @@ public class MarkController : BaseController
         if (!ModelState.IsValid) return BadRequest("Bad request");
 
         double radius = 200;
-
+            
         var nearby = await _distanceService.GetMarksNearby(req.Latitude, req.Longitude, radius);
         if (nearby.Count == 0) return BadRequest("Nothing has been reached");
 

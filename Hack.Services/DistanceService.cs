@@ -33,8 +33,6 @@ public class DistanceService : IDistanceService
         var found = all.FindAll(mark =>
             GetDistanceBetweenCoordinates(latitude, longitude,
                 mark.Latitude, mark.Longitude) <= radius);
-        
-        if (found.Count == 0) throw new Exception("No marks has been found nearby");
         return found;
     }
     
