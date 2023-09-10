@@ -19,4 +19,5 @@ public interface IUserService
     Task<List<User>> OrderByMostDiscoveries(int amount, int offset = 0);
     Task<bool> IsMarkDiscovered(Guid userId, int markId);
     Task<User> FullyUserUpdate(Guid id, User user);
+    Task<User> GetUserByUsernameAsync(string username);
 }

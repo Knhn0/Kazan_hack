@@ -5,6 +5,7 @@ using Hack.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace hack_kazan.Controllers;
 
@@ -69,6 +70,19 @@ public class UserController : BaseController
         var response = _userManager.DeleteAsync(user);
         return Ok("User successfully deleted");
     }
-    
+
+    [HttpGet]
+    [Route("get-by-username/{username}")]
+    public async Task<ActionResult<User>> GetUserByUsername(string username)
+    {
+        var res = username.IsNullOrEmpty();
+        if (res)
+        {
+            return BadRequest("User not found");
+        }
+
+        var resp = await _userService.GetUserByUsernameAsync(username);
+        return Ok(resp);
+    }
     
 }

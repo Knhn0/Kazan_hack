@@ -107,4 +107,12 @@ public class UserService : IUserService
         if (candidate == null) throw new Exception("User not found.");
         return candidate.MarksDiscovered!.Contains(markId);
     }
+
+    public async Task<User> GetUserByUsernameAsync(string username)
+    {
+        var candidate = await _userManager.FindByNameAsync(username);
+        if (candidate == null) throw new Exception("User not found.");
+        return candidate;
+    }
+
 }
